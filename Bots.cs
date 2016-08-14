@@ -16,12 +16,21 @@ namespace Lesson9.Bots
 
         public abstract void Greating();
         public abstract void Bye();
-        public abstract void Notunderstand();
+        public abstract void NotUnderstand();
         public abstract void HowAreYou();
 
-        public static Bot GetBot(int typeBot)
+        // static
+        public static Bot CurrentBot;
+        public static Dictionary<Bots, string> BotToLanguage = new Dictionary<Bots, string>
         {
-            switch ((Bots)typeBot)
+            [Bots.Eng] =  "hello,hi,dude" ,
+            [Bots.Ukr] = "привіт,вітаю,добрий",
+            [Bots.Rus] = "привет,здравствуйте,здравствуй"
+        };
+
+        public static Bot GetBot(Bots typeBot)
+        {
+            switch (typeBot)
             {
                 case Bots.Eng:
                     return new EngBot("Jonny");
@@ -52,7 +61,7 @@ namespace Lesson9.Bots
         }
         public override void Bye()
         {
-            throw new NotImplementedException();
+            WriteLine("Я втомився. До зустрічі");
         }
 
         public override void Greating()
@@ -62,16 +71,21 @@ namespace Lesson9.Bots
             WriteLine("А тебе ?");
             ReadLine();
             WriteLine("Приємно познайомитися.");
+            
         }
 
         public override void HowAreYou()
         {
             WriteLine("Як твої справи?");
+            ReadLine();
+            
         }
 
-        public override void Notunderstand()
+        public override void NotUnderstand()
         {
-            throw new NotImplementedException();
+            WriteLine("Запитай мене: ");
+            ReadLine();
+            WriteLine("Вибач. Але я не розумію тебе");
         }
     }
     sealed class EngBot : Bot
@@ -94,7 +108,8 @@ namespace Lesson9.Bots
 
         public override void Bye()
         {
-            WriteLine("How are you, my new friend?");
+            WriteLine("I am tired. See you soon");
+
         }
 
         public override void Greating()
@@ -104,16 +119,22 @@ namespace Lesson9.Bots
             WriteLine("And You?");
             ReadLine();
             WriteLine("Nice to meet you.");
+            
         }
 
         public override void HowAreYou()
         {
             WriteLine("How are you, my new friend?");
+            ReadLine();
+            
         }
 
-        public override void Notunderstand()
+        public override void NotUnderstand()
         {
-            throw new NotImplementedException();
+            WriteLine("Ask me anything: ");
+            ReadLine();
+            WriteLine("Sorry. I don't understand you. ");
+
         }
     }
     sealed class RusBot : Bot
@@ -135,26 +156,30 @@ namespace Lesson9.Bots
 
         public override void Bye()
         {
-            throw new NotImplementedException();
+            WriteLine("Что то я устал. Ладно давай  до встречи");
         }
 
         public override void Greating()
         {
             string msg = "Привет. Меня звать {0}";
             WriteLine(msg,Name);
-            Write("А тебя?");
+            WriteLine("А тебя?");
             ReadLine();
             WriteLine("Приятно познакомиться.");
+            
         }
 
         public override void HowAreYou()
         {
             WriteLine("Как твои делишки?");
+            ReadLine();
         }
 
-        public override void Notunderstand()
+        public override void NotUnderstand()
         {
-            throw new NotImplementedException();
+            WriteLine("Спроси меня: ");
+            ReadLine();
+            WriteLine("Не могу понять что ты хочеш от меня");
         }
     }
     enum Bots
