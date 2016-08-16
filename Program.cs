@@ -16,35 +16,37 @@ namespace Lesson9
         {
             OutputEncoding = Encoding.Unicode;
             InputEncoding = Encoding.Unicode;
-            ForegroundColor = ConsoleColor.Green;
-            
+            ForegroundColor = ConsoleColor.White;
+
+            Bot bot = null;
             while (!_exit)
             {
-                Prompt(ReadLine());
+                Prompt(ReadLine(), bot);
             }
             
             // Delay
             ReadKey();
         }
-        private static void Prompt(string strValue)
+        private static void Prompt(string strValue, Bot bot)
         {
+            
             try
             {
-                
-                if (Bot.CurrentBot == null)
+                if (bot == null)
                 {
-                    Bots.Bots botType = CheckTypeBot(strValue);
+                    BotType botType = Bot.CheckTypeBot(strValue);
                     Clear();
-                    Bot.CurrentBot = Bot.GetBot(botType);
+                    bot = Bot.GetBot(botType);
+                    
                 }
 
-                Bot.CurrentBot.Greating();
-                Bot.CurrentBot.HowAreYou();
-                Bot.CurrentBot.NotUnderstand();
-                Bot.CurrentBot.Bye();
-                WriteLine("Bye");
+                bot.Greating();
+                bot.HowAreYou();
+                bot.NotUnderstand();
+                bot.Bye();
+                WriteLine("\tBye");
                 _exit = true;
-                
+
             }
             catch(Exception ex)
             {
@@ -54,40 +56,10 @@ namespace Lesson9
             }
 
         }
-        private static Bots.Bots CheckTypeBot(string data)
-        {
-            foreach (var KV in Bot.BotToLanguage)
-            {
-                string text = KV.Value;
-                string[] words = text.Split(',');
-                foreach (var word in words)
-                {
-                    if (word == data.ToLower().Trim())
-                    {
-                        return KV.Key;
-                    }
-                }  
-            }
-            throw new Exception("Error. Unchecked Bot.");
-        }
-
-
-
-
-
-
     }
 }
 
 
 
  
-   /*
-    Dict <string,Enum>{
-        ["ukr"]=Enum.Ukr,
-        ......
-    
-    };
-     
-     
-     */
+  

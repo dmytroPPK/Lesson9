@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bots.cs" />
+    <Compile Include="Bots\Bot.cs" />
+    <Compile Include="Bots\BotType.cs" />
+    <Compile Include="Bots\EngBot.cs" />
+    <Compile Include="Bots\RusBot.cs" />
+    <Compile Include="Bots\UkrBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
